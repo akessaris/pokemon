@@ -1,0 +1,9 @@
+.pokemon-image {
+  height: 300px;
+  width: 300px;
+}
+
+.pokemon-name {
+  font-weight: normal;
+  text-transform: uppercase;
+}
