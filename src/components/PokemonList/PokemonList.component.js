@@ -1,46 +1,26 @@
-import { Card, CardActionArea, CardContent, Grid, makeStyles, Typography } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 import { fetchPokemon } from '../../services/fetchData';
+import PokemonCard from '../PokemonCard/PokemonCard.component';
 import './PokemonList.css';
 
-const useStyles = makeStyles({
-  root: {
-    maxWidth: 300,
-  },
-});
 
 function PokemonList() {
   const [pokemon, setPokemon] = useState([]);
-  const classes = useStyles();
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetchPokemon(151); // TODO: remove hardcoded
       setPokemon(response);
+      setLoaded(true);
     }
+    // setTimeout(() => fetchData(), 1000);
     fetchData();
   }, []);
 
-  // TODO: replace with spinner?
-  let pokemonCards = [];
-  if (!pokemon || !pokemon.length) {
-    pokemonCards = <div>No pokemon to render</div>
-  } else {
-    pokemonCards = pokemon.map(({ number, name, image, types }) => (
-      <Grid item key={number}>
-        <Card className={classes.root}>
-          <CardActionArea>
-            <img className="pokemon-image" src={image} alt={name}/>
-            <CardContent>
-              <Typography variant="h5">{name}</Typography>
-              <Typography variant="h5">{types.join('/')}</Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Grid>
-
-    ))
-  }
+  const pokemonList = loaded ? pokemon : Array.from(new Array(15));
+  const pokemonCards = pokemonList.map((pokemon, index) => <PokemonCard key={index} {...pokemon}/>);
 
   return (
     <div className="PokemonList">
