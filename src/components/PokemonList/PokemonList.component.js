@@ -15,7 +15,7 @@ function PokemonList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetchPokemon();
+      const response = await fetchPokemon(151); // TODO: remove hardcoded
       setPokemon(response);
     }
     fetchData();
@@ -26,13 +26,13 @@ function PokemonList() {
   if (!pokemon || !pokemon.length) {
     pokemonCards = <div>No pokemon to render</div>
   } else {
-    pokemonCards = pokemon.map(({ id, name, artwork }) => (
-      <Grid item key={id}>
+    pokemonCards = pokemon.map(({ number, name, image }) => (
+      <Grid item key={number}>
         <Card className={classes.root}>
           <CardActionArea>
-            <img className="pokemon-image" src={artwork} alt={name}/>
+            <img className="pokemon-image" src={image} alt={name}/>
             <CardContent>
-              <Typography variant="h5" gutterBottom className="pokemon-name">{name}</Typography>
+              <Typography variant="h5" className="pokemon-name">{name}</Typography>
             </CardContent>
           </CardActionArea>
         </Card>

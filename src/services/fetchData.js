@@ -1,36 +1,24 @@
-const getQuery = () => {
-  return `query pokemons($limit: Int, $offset: Int) {
-    pokemons(limit: $limit, offset: $offset) {
-      next
-      previous
-      status
-      message
-      results {
-        id
-        name
-        artwork
-      }
+const getQuery = (num) => {
+  return `query pokemons {
+    pokemons(first: ${num}) {
+      number
+      name
+      types
+      image
     }
-  }`;
+  }
+  `;
 }
 
-// TODO: leverage offset for subsequent queries if implementing infinite scroll
-export const fetchPokemon = async () => {
-  const gqlVariables = {
-    limit: 9,
-    offset: 0,
-  };
-
-  return fetch('https://graphql-pokeapi.vercel.app/api/graphql', {
+export const fetchPokemon = async (num) => {
+  return fetch('https://graphql-pokemon2.vercel.app/', {
     credentials: 'omit',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      query: getQuery(),
-      variables: gqlVariables,
+      query: getQuery(num),
     }),
     method: 'POST',
   })
     .then((res) => res.json())
-    .then(({ data: { pokemons: { results } } } ) => results);
+    .then(({ data: { pokemons } } ) => pokemons);
 }
-
