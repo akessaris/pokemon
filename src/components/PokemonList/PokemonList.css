@@ -5,5 +5,5 @@
 
 .pokemon-name {
   font-weight: normal;
-  text-transform: uppercase;
+  text-transform: capitalize;
 }

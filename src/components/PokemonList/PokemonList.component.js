@@ -27,12 +27,12 @@ function PokemonList() {
     pokemonCards = <div>No pokemon to render</div>
   } else {
     pokemonCards = pokemon.map(({ id, name, artwork }) => (
-      <Grid item>
-        <Card className={classes.root} key={id}>
+      <Grid item key={id}>
+        <Card className={classes.root}>
           <CardActionArea>
             <img className="pokemon-image" src={artwork} alt={name}/>
             <CardContent>
-              <Typography variant="h5" gutterBottom classes="pokemon-name">{name}</Typography>
+              <Typography variant="h5" gutterBottom className="pokemon-name">{name}</Typography>
             </CardContent>
           </CardActionArea>
         </Card>
@@ -47,8 +47,6 @@ function PokemonList() {
         container
         spacing={5}
         direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
       >{pokemonCards}</Grid>
     </div>
   );
