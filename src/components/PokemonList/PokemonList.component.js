@@ -26,13 +26,14 @@ function PokemonList() {
   if (!pokemon || !pokemon.length) {
     pokemonCards = <div>No pokemon to render</div>
   } else {
-    pokemonCards = pokemon.map(({ number, name, image }) => (
+    pokemonCards = pokemon.map(({ number, name, image, types }) => (
       <Grid item key={number}>
         <Card className={classes.root}>
           <CardActionArea>
             <img className="pokemon-image" src={image} alt={name}/>
             <CardContent>
-              <Typography variant="h5" className="pokemon-name">{name}</Typography>
+              <Typography variant="h5">{name}</Typography>
+              <Typography variant="h5">{types.join('/')}</Typography>
             </CardContent>
           </CardActionArea>
         </Card>
