@@ -1,10 +1,11 @@
 import './App.css';
-import PokemonList from './components/PokemonList/PokemonList.component';
+import NavBar from './components/NavBar/NavBar.component';
 
 function App() {
   return (
     <div className="App">
-      <PokemonList />
+      <h1>Pokemon</h1>
+      <NavBar />
     </div>
   );
 }
