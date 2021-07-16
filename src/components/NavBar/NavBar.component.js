@@ -3,6 +3,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import PokemonList from '../PokemonList/PokemonList.component';
+import Pokemon from '../Pokemon/Pokemon.component';
 
 export default function NavBar() {
   const [value, setValue] = React.useState('Pokedex');
@@ -29,6 +30,7 @@ export default function NavBar() {
         <Switch>
           <Route path="/" exact><Redirect to="/pokemon" /></Route>
           <Route path="/pokemon" exact><PokemonList /></Route>
+          <Route path="/pokemon/:name"><Pokemon /></Route>
         </Switch>
       </div>
     </BrowserRouter>

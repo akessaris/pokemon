@@ -1,5 +1,6 @@
 import { Card, CardActionArea, CardContent, Grid, makeStyles, Typography } from '@material-ui/core';
 import { Skeleton } from '@material-ui/lab';
+import { Link, useRouteMatch } from 'react-router-dom';
 
 const useStyles = makeStyles({
   root: {
@@ -10,11 +11,12 @@ const useStyles = makeStyles({
 const PokemonCard = ({ number, image, name, types }) => {
   const classes = useStyles();
   const loaded = !!name;
+  const { url } = useRouteMatch();
 
   return (
     <Grid item key={number}>
       <Card className={classes.root}>
-        <CardActionArea>
+        <CardActionArea component={Link} to={`${url}/${name}`}>
           {
             loaded
               ? <img className="pokemon-image" src={image} alt={name}/>
@@ -28,7 +30,7 @@ const PokemonCard = ({ number, image, name, types }) => {
           }
           {
             loaded
-              ? <Typography variant="h5">{types.join('/')}</Typography>
+              ? <Typography variant="h6">{types.join('/')}</Typography>
               : <Skeleton />
           }
           </CardContent>

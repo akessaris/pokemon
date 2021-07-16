@@ -1,6 +1,6 @@
 import { Grid } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import { fetchPokemon } from '../../services/fetchData';
+import { fetchPokemons } from '../../services/fetchData';
 import PokemonCard from '../PokemonCard/PokemonCard.component';
 import './PokemonList.css';
 
@@ -11,7 +11,7 @@ function PokemonList() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetchPokemon(151); // TODO: remove hardcoded
+      const response = await fetchPokemons(151); // TODO: remove hardcoded
       setPokemon(response);
       setLoaded(true);
     }
