@@ -1,4 +1,4 @@
-const getPokemonQuery = (name) => {
+export const getPokemonQuery = (name) => {
   return `query pokemon {
     pokemon (name: "${name}") {
       number
@@ -13,7 +13,7 @@ const getPokemonQuery = (name) => {
   }`;
 };
 
-const getPokemonsQuery = (num) => {
+export const getPokemonsQuery = (num) => {
   return `query pokemons {
     pokemons(first: ${num}) {
       number
@@ -25,19 +25,7 @@ const getPokemonsQuery = (num) => {
   `;
 }
 
-export const fetchPokemon = async (num) => {
-  const query = getPokemonQuery(num);
-  const { data: { pokemon } } = await fetchData(query);
-  return pokemon;
-};
-
-export const fetchPokemons = async (num) => {
-  const query = getPokemonsQuery(num);
-  const { data: { pokemons } } = await fetchData(query);
-  return pokemons;
-};
-
-const fetchData = async (query) => {
+export const fetcher = async (query) => {
   return fetch('https://graphql-pokemon2.vercel.app/', {
     credentials: 'omit',
     headers: { 'Content-Type': 'application/json' },
@@ -46,5 +34,6 @@ const fetchData = async (query) => {
     }),
     method: 'POST',
   })
-  .then((res) => res.json());
+  .then((res) => res.json())
+  .then(({ data }) => data);
 };

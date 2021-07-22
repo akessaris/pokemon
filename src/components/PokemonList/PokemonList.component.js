@@ -1,26 +1,12 @@
 import { Grid } from '@material-ui/core';
-import { useEffect, useState } from 'react';
-import { fetchPokemons } from '../../services/fetchData';
+import usePokemons from '../../hooks/usePokemons';
 import PokemonCard from '../PokemonCard/PokemonCard.component';
 import './PokemonList.css';
 
 
 function PokemonList() {
-  const [pokemon, setPokemon] = useState([]);
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetchPokemons(151); // TODO: remove hardcoded
-      setPokemon(response);
-      setLoaded(true);
-    }
-    // setTimeout(() => fetchData(), 1000);
-    fetchData();
-  }, []);
-
-  const pokemonList = loaded ? pokemon : Array.from(new Array(15));
-  const pokemonCards = pokemonList.map((pokemon, index) => <PokemonCard key={index} {...pokemon}/>);
+  const { pokemons } = usePokemons(151);
+  const pokemonCards = pokemons.map((pokemon, index) => <PokemonCard key={index} {...pokemon}/>)
 
   return (
     <div className="PokemonList">
