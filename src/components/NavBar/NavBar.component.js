@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
+import SkeletonPokemonList from '../skeletons/SkeletonPokemonList';
 
 // Lazy loaded components
 const PokemonList = lazy(() => import('../PokemonList/PokemonList.component'));
@@ -28,13 +29,13 @@ export default function NavBar() {
           <Tab key="Pokedex" label="Pokedex" value="Pokedex" component={Link} to="/pokemon"/>
         </Tabs>
 
-        <Suspense fallback={<div>Loading...</div>}>
           <Switch>
             <Route path="/" exact><Redirect to="/pokemon" /></Route>
-            <Route path="/pokemon" exact component={PokemonList}></Route>
+            <Suspense fallback={<SkeletonPokemonList />}>
+              <Route path="/pokemon" exact component={PokemonList}></Route>
+            </Suspense>
             <Route path="/pokemon/:name" component={Pokemon}></Route>
           </Switch>
-        </Suspense>
       </div>
     </BrowserRouter>
   );
