@@ -2,11 +2,14 @@ import React, { lazy, Suspense } from 'react';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
-import SkeletonPokemonList from '../skeletons/SkeletonPokemonList';
+import SkeletonPokemonList from '../skeletons/SkeletonPokemonList/SkeletonPokemonList';
+import SkeletonPokemon from '../skeletons/SkeletonPokemon/SkeletonPokemon';
+
+import Pokemon from '../Pokemon/Pokemon.component';
 
 // Lazy loaded components
 const PokemonList = lazy(() => import('../PokemonList/PokemonList.component'));
-const Pokemon = lazy(() => import('../Pokemon/Pokemon.component'));
+// const Pokemon = lazy(() => import('../Pokemon/Pokemon.component'));
 
 export default function NavBar() {
   const [value, setValue] = React.useState('Pokedex');
@@ -29,13 +32,20 @@ export default function NavBar() {
           <Tab key="Pokedex" label="Pokedex" value="Pokedex" component={Link} to="/pokemon"/>
         </Tabs>
 
-          <Switch>
-            <Route path="/" exact><Redirect to="/pokemon" /></Route>
-            <Suspense fallback={<SkeletonPokemonList />}>
-              <Route path="/pokemon" exact component={PokemonList}></Route>
-            </Suspense>
-            <Route path="/pokemon/:name" component={Pokemon}></Route>
-          </Switch>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Switch>
+              <Route path="/" exact><Redirect to="/pokemon" /></Route>
+
+              <Suspense fallback={<SkeletonPokemonList />}>
+                <Route path="/pokemon" exact component={PokemonList}></Route>
+              </Suspense>
+
+              <Suspense fallback={<SkeletonPokemon />}>
+                <Route path="/pokemon/:name" component={Pokemon}></Route>
+              </Suspense>
+
+            </Switch>
+          </Suspense>
       </div>
     </BrowserRouter>
   );
