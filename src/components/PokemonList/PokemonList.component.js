@@ -6,7 +6,7 @@ import './PokemonList.css';
 
 function PokemonList() {
   const { isError, pokemons = [] } = usePokemons(151);
-  const pokemonCards = pokemons.map((pokemon, index) => <PokemonCard key={index} {...pokemon}/>)
+  const pokemonCards = pokemons.map((pokemon) => <PokemonCard key={pokemon.number} {...pokemon}/>)
 
   return (
     <div className="PokemonList">

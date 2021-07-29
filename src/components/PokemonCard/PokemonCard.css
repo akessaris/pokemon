@@ -1,0 +1,19 @@
+.normal {
+  background-color: lightgray;
+}
+
+.grass {
+  background-color: lightgreen;
+}
+
+.fire {
+  background-color: coral;
+}
+
+.water {
+  background-color: lightblue;
+}
+
+.poison {
+  background-color: pink;
+}
