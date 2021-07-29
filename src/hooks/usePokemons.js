@@ -2,11 +2,12 @@ import useSWR from "swr";
 import { fetcher, getPokemonsQuery } from "../services/fetchData";
 
 const usePokemons = (num) => {
-  const { data, error } = useSWR(getPokemonsQuery(num), fetcher, { suspense: true });
+  // TODO: get error from useSWR instead of data
+  const { data } = useSWR(getPokemonsQuery(num), fetcher, { suspense: true });
   return {
     pokemons: data?.pokemons,
-    isLoading: !error & !data?.pokemons,
-    isError: error,
+    isLoading: !data.error & !data?.pokemons,
+    isError: data?.error,
   };
 };
 

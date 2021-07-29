@@ -5,16 +5,21 @@ import './PokemonList.css';
 
 
 function PokemonList() {
-  const { pokemons } = usePokemons(151);
+  const { isError, pokemons = [] } = usePokemons(151);
   const pokemonCards = pokemons.map((pokemon, index) => <PokemonCard key={index} {...pokemon}/>)
 
   return (
     <div className="PokemonList">
-      <Grid
-        container
-        spacing={5}
-        direction="row"
-      >{pokemonCards}</Grid>
+      {
+        !isError
+          ? <Grid
+            container
+            spacing={5}
+            direction="row"
+          >{pokemonCards}</Grid>
+
+          : <div>{isError?.message}</div>
+      }
     </div>
   );
 }
