@@ -1,0 +1,28 @@
+{
+  "pokemons": [
+    {
+      "number": 1,
+      "image": "",
+      "name": "Scarlet",
+      "types": ["Normal"]
+    },
+    {
+      "number": 1,
+      "image": "",
+      "name": "Scarlet",
+      "types": ["Fire", "Water"]
+    },
+    {
+      "number": 1,
+      "image": "",
+      "name": "Scarlet",
+      "types": ["Grass", "Poison"]
+    },
+    {
+      "number": 1,
+      "image": "",
+      "name": "Scarlet",
+      "types": ["Grass"]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import pokemons from '../mockData/pokemons.json';
+
 export const getPokemonQuery = (name) => {
   return `query pokemon {
     pokemon (name: "${name}") {
@@ -26,15 +28,17 @@ export const getPokemonsQuery = (num) => {
 }
 
 export const fetcher = async (query) => {
-  return fetch('https://graphql-pokemon2.vercel.app/', {
-    credentials: 'omit',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      query
-    }),
-    method: 'POST',
-  })
-  .then((res) => res.json())
-  .then(({ data }) => data)
-  .catch(error => ({ error }));
+  // TODO: return this when on "OFFLINE" mode
+  return pokemons;
+  // return fetch('https://graphql-pokemon2.vercel.app/', {
+  //   credentials: 'omit',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({
+  //     query
+  //   }),
+  //   method: 'POST',
+  // })
+  // .then((res) => res.json())
+  // .then(({ data }) => data)
+  // .catch(error => ({ error }));
 };
