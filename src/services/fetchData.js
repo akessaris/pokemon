@@ -35,5 +35,6 @@ export const fetcher = async (query) => {
     method: 'POST',
   })
   .then((res) => res.json())
-  .then(({ data }) => data);
+  .then(({ data }) => data)
+  .catch(error => ({ error }));
 };
