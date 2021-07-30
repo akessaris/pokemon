@@ -11,10 +11,10 @@ const useStyles = makeStyles({
 const PokemonCard = ({ number, image, name, types = [] }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
-  const typeElements = types.map(type => <span style={{ margin: '5px', padding: '5px' }} className={type.toLowerCase()}>{type}</span>);
+  const typeElements = types.map(type => <span key={type} style={{ margin: '5px', padding: '5px' }} className={type.toLowerCase()}>{type}</span>);
 
   return (
-    <Grid item key={number}>
+    <Grid item>
       <Grow in={true}>
         <Card className={classes.root}>
           <CardActionArea component={Link} to={`${url}/${name}`}>
