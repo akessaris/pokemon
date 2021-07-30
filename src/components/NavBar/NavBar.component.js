@@ -6,6 +6,7 @@ import SkeletonPokemonList from '../skeletons/SkeletonPokemonList/SkeletonPokemo
 import SkeletonPokemon from '../skeletons/SkeletonPokemon/SkeletonPokemon';
 
 import Pokemon from '../Pokemon/Pokemon.component';
+import ErrorBoundary from '../../hoc/ErrorBoundary';
 
 // Lazy loaded components
 const PokemonList = lazy(() => import('../PokemonList/PokemonList.component'));
@@ -32,20 +33,22 @@ export default function NavBar() {
           <Tab key="Pokedex" label="Pokedex" value="Pokedex" component={Link} to="/pokemon"/>
         </Tabs>
 
+        <ErrorBoundary fallback={<div>Failed to load Pokemon</div>}>
           <Suspense fallback={<div>Loading...</div>}>
-            <Switch>
-              <Route path="/" exact><Redirect to="/pokemon" /></Route>
+              <Switch>
+                <Route path="/" exact><Redirect to="/pokemon" /></Route>
 
-              <Suspense fallback={<SkeletonPokemonList />}>
-                <Route path="/pokemon" exact component={PokemonList}></Route>
-              </Suspense>
+                <Suspense fallback={<SkeletonPokemonList />}>
+                  <Route path="/pokemon" exact component={PokemonList}></Route>
+                </Suspense>
 
-              <Suspense fallback={<SkeletonPokemon />}>
-                <Route path="/pokemon/:name" component={Pokemon}></Route>
-              </Suspense>
+                <Suspense fallback={<SkeletonPokemon />}>
+                  <Route path="/pokemon/:name" component={Pokemon}></Route>
+                </Suspense>
 
-            </Switch>
-          </Suspense>
+              </Switch>
+            </Suspense>
+        </ErrorBoundary>
       </div>
     </BrowserRouter>
   );
