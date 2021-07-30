@@ -5,12 +5,11 @@ import { BrowserRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
 import SkeletonPokemonList from '../skeletons/SkeletonPokemonList/SkeletonPokemonList';
 import SkeletonPokemon from '../skeletons/SkeletonPokemon/SkeletonPokemon';
 
-import Pokemon from '../Pokemon/Pokemon.component';
 import ErrorBoundary from '../../hoc/ErrorBoundary';
 
 // Lazy loaded components
 const PokemonList = lazy(() => import('../PokemonList/PokemonList.component'));
-// const Pokemon = lazy(() => import('../Pokemon/Pokemon.component'));
+const Pokemon = lazy(() => import('../Pokemon/Pokemon.component'));
 
 export default function NavBar() {
   const [value, setValue] = React.useState('Pokedex');
@@ -40,12 +39,10 @@ export default function NavBar() {
 
                 <Suspense fallback={<SkeletonPokemonList />}>
                   <Route path="/pokemon" exact component={PokemonList}></Route>
+                  <Suspense fallback={<SkeletonPokemon />}>
+                    <Route path="/pokemon/:name" exact component={Pokemon}></Route>
+                  </Suspense>
                 </Suspense>
-
-                <Suspense fallback={<SkeletonPokemon />}>
-                  <Route path="/pokemon/:name" component={Pokemon}></Route>
-                </Suspense>
-
               </Switch>
             </Suspense>
         </ErrorBoundary>

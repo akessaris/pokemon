@@ -8,7 +8,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PokemonCard = ({ number, image, name, types = [] }) => {
+const PokemonCard = ({ image, name, types = [] }) => {
   const classes = useStyles();
   const { url } = useRouteMatch();
   const typeElements = types.map(type => <span key={type} style={{ margin: '5px', padding: '5px' }} className={type.toLowerCase()}>{type}</span>);

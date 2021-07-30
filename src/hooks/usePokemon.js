@@ -4,7 +4,7 @@ import { fetcher, getPokemonQuery } from "../services/fetchData";
 const usePokemon = (name) => {
   const { data } = useSWR(getPokemonQuery(name), fetcher, { suspense: true });
   return {
-    pokemons: data?.pokemon,
+    pokemon: data?.pokemon,
     isLoading: !data?.pokemon,
   };
 };
